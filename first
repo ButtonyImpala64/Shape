@@ -1,151 +1,23 @@
-https://prod.liveshare.vsengsaas.visualstudio.com/join?12F5DF09741D58057F32B82031E2FE6E4188
-
-
-
-https://prod.liveshare.vsengsaas.visualstudio.com/join?D0E4531A5B6CA26CA9D7879FE3FCD7C862CF
-
-
-https://prod.liveshare.vsengsaas.visualstudio.com/join?39DE7B453B9F85C408BB0D666B30FE3F1AEF
-
-
-
-using System;
-
-namespace main
-{
-
-
-
-    internal class Program
+    public class Password
     {
-        static void Main(string[] args)
+        private string Pword;
+       public void setPW(string Pword)
         {
-            bool newShape = true;
-            double perp1, perp2, hyp;
-            RightAngle rangle;
-
-            while (newShape)
+            this.Pword = Pword;
+        }
+       public string getPW() { return Pword; }
+        public bool validLength()
+        {
+            int num=Pword.Length;
+            if (num >= 8) return true;
+            else return false;
+        }
+        public bool oneNumatLeast()
+        {
+            for (int i = 0; i < Pword.Length; i++)
             {
-
-                Console.WriteLine("Hello, What shape do you want to choose? A Quadrilateral or a Triangle?\nQuadrilateral - 1\nTriangle - 2;");
-                switch_on = int.Parse(Console.ReadLine());
-                switch (switch_on)
-                {
-                
-                    case 1:
-                        Console.WriteLine("From the Quadrilateral shapes which one do u choose to create ?(Dalton - 1,Rectangle - 2 ,bndeef bkra - 3)");
-                        int qShapes = int.Parse(Console.ReadLine());
-
-                        switch (qShapes)
-                        {
-                            case 1:
-                            
-                                break;
-                            default:
-                                break;
-                        }
-
-                        break;
-                    case 2:
-                        Console.WriteLine("From the Triangles which one do u choose to create ?(Rangle - 1");
-                        switch_on = int.Parse(Console.ReadLine());
-                        switch (switch_on)
-                        {
-                            case 1:
-                                Console.WriteLine("Enter the sides of the triangle...\nPerpendicular 1:");
-                                perp1 = double.Parse(Console.ReadLine());
-                                Console.WriteLine("Perpendicular 2:");
-                                perp2 = double.Parse(Console.ReadLine());
-                                Console.WriteLine("Hypotenuse:");
-                                hyp = double.Parse(Console.ReadLine());
-
-                                rangle = new RightAngle(perp1, perp2, hyp);
-
-                                break;
-                            default:
-                        }
-
-                        break;
-                    default:
-
-                }
-                Console.WriteLine("+");
-
-
-
-                //Console.WriteLine("Hello what shape do u choose?(Quadrilateral-1,Dalton-2,Rectangle-3,RightAngle-4,");
-
-
-
-
+                if (Pword[i] <= '9' || Pword[i] >= '0') return true;
             }
-
+            return false;
         }
     }
-
-}
-
-class Quadrilateral
-{
-
-    private Dalton dltn;
-    private Rectangle rctngl;
-
-}
-
-class Dalton
-{
-
-    private double dmtr;
-
-}
-
-class Rectangle
-{
-
-    private double width;
-    private double length;
-
-}
-
-class Triangles
-{
-
-    private RightAngle rangl;
-
-}
-
-class RightAngle
-{
-
-    private double perp1 = null;
-
-    private double perp2 = null;
-
-    private double hyp = null;
-
-
-
-    public RightAngle(double p1, double p2, double hyp) {
-
-      perp1 = p1;
-      perp2 = p2;
-      this.hyp = hyp; 
-      
-    }
-    public double Area()
-    {
-
-        return perp1 * perp2 / 2;
-
-    }
-
-    public double Perimeter()
-    {
-
-        return perp1 + perp2 + hyp;
-
-    }
-
-
-}
