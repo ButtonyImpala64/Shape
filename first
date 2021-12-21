@@ -1,3 +1,4 @@
+    ABED EL RA7MAN:
     public class Password
     {
         private string Pword;
@@ -21,3 +22,58 @@
             return false;
         }
     }
+MohmdwG4mer:
+        public class Password
+        {
+            private string Pword;
+            private bool flagLower;
+            private bool flagUpper;
+            public bool hasONELowerCase()
+            {
+                 flagLower = false;
+                int count = 0;
+
+                while (!flagLower && count !=Pword.Length)
+                {
+                    if (char.IsLower(Pword[count]))
+                    {
+                        flagLower = true;
+                    }
+                    else
+                    {
+                        flagLower = false;
+                    }
+                    count++;
+                }
+                return flagLower;
+            }
+            public bool hasONEUpperCase()
+            {
+                 flagUpper = false;
+                int count = 0;
+
+                while (!flagUpper && count != Pword.Length)
+                {
+                    if (char.IsUpper(Pword[count]))
+                    {
+                        flagUpper = true;
+                    }
+                    else
+                    {
+                        flagUpper = false;
+                    }
+                    count++;
+                }
+                return flagUpper;
+            }
+
+            public void setPassword(string password)
+            {
+                this.Pword = password;
+            }
+            public string getPassword()
+            {
+                return Pword;
+            }
+
+        }
