@@ -1,39 +1,39 @@
-    ABED EL RA7MAN:
-    public class Password
+using System;
+//PassWord Checker!!!
+namespace ClassWork1
+{
+    internal class Program
     {
-        private string Pword;
-       public void setPW(string Pword)
-        {
-            this.Pword = Pword;
-        }
-       public string getPW() { return Pword; }
-        public bool validLength()
-        {
-            int num=Pword.Length;
-            if (num >= 8) return true;
-            else return false;
-        }
-        public bool oneNumatLeast()
-        {
-            for (int i = 0; i < Pword.Length; i++)
-            {
-                if (Pword[i] <= '9' || Pword[i] >= '0') return true;
-            }
-            return false;
-        }
-    }
-MohmdwG4mer:
+
         public class Password
         {
             private string Pword;
             private bool flagLower;
             private bool flagUpper;
+            public bool validLength()
+            {
+                int num = Pword.Length;
+                if (num >= 8) return true;
+                else return false;
+            }
+            public bool oneNumatLeast()
+            {
+                bool flagNum = false;
+                int counter = 0;
+                while (!flagNum && counter < Pword.Length)
+                {
+                    if (Pword[counter] <= '9' && Pword[counter] >= '0') flagNum = true;
+                    counter++;
+                }
+
+                return flagNum;
+            }
             public bool hasONELowerCase()
             {
-                 flagLower = false;
+                flagLower = false;
                 int count = 0;
 
-                while (!flagLower && count !=Pword.Length)
+                while (!flagLower && count != Pword.Length)
                 {
                     if (char.IsLower(Pword[count]))
                     {
@@ -49,7 +49,7 @@ MohmdwG4mer:
             }
             public bool hasONEUpperCase()
             {
-                 flagUpper = false;
+                flagUpper = false;
                 int count = 0;
 
                 while (!flagUpper && count != Pword.Length)
@@ -77,3 +77,261 @@ MohmdwG4mer:
             }
 
         }
+        /*
+         * anOTHER SOLUTION!!
+        class Email
+        {
+
+            public string email;
+            string[] vextsn = { "gmail.com", "hotmail.com", "outlook.com", "yahoo.com" };
+            public bool valid;
+
+
+            public bool CheckEmail()
+            {
+                //System.Console.WriteLine(vextsn[1]);
+
+                int index = email.IndexOf("@");
+
+                if (index == -1)
+                {
+                    valid = false;
+                    return valid;
+                }
+                else
+                {
+                    char[] extns = new char[email.Length - index - 1];
+
+                    for (int i = 0; i < (email.Length - index - 1); i++)
+                        extns[i] = email[i + index + 1];
+
+                    valid = false;
+                    for (int i = 0; i < vextsn.Length; i++)
+                    {
+                        if (valid == true)
+                            return true;
+                        valid = true;
+                        //Console.WriteLine(extns.Length);
+                        //Console.WriteLine(vextsn[i].Length);
+                        if (vextsn[i].Length != extns.Length)
+                        {
+                            valid = false;
+                            continue;
+                        }
+
+                        if (valid == false)
+                            return valid;
+
+                        for (int j = 0; j < vextsn[i].Length; j++)
+                        {
+                            //System.Console.WriteLine("" + extns[j] + vextsn[i][j]);
+                            if (extns[j] != vextsn[i][j])
+                            {
+                                valid = false;
+                                break;
+                            }
+                        }
+
+                        if (email == "@" + vextsn[i])
+                            valid = false;
+
+                    }
+                }
+
+                return valid;
+
+            }
+
+        }
+        */
+        public class mail
+        {
+            private string Email = "";
+            private string[] extn = { "@gmail.com", "@hotmail.com", "@yahoo.com", "@outlook.com" };
+
+            public bool checkMailExtn()//checks if it has a valid extension
+            {
+                int indexOf = Email.IndexOf('@');//finding the index of the Character : '@' in the given string.
+                if (indexOf == -1 /* || index == -1*/)//if '@' wasn't found it returns the value -1.
+                {
+                    return false;
+                }
+                string helper = "";//this variable helps us to save the extension of the given string. 
+                //alternative way to find the index of '@':
+                /*
+                int index = 0; 
+                for (int i = 0; i < Email.Length; i++)
+                {
+                    if (Email[i] == '@')
+                    {
+                        index = i;
+                        break;
+                    }
+                    else
+                    {
+                        index = -1;//if it wasn't found!
+                    }
+                }
+                */
+                bool state = false;
+                for (int i = indexOf; i < Email.Length; i++)
+                {
+                    helper += Email[i];
+                }
+
+                foreach (string mail in extn)//checks if it has a valid extension
+                {
+                    if (helper == mail)
+                    {
+                        state = true;
+                        break;
+                    }
+                    else state = false;
+                }
+                return state;
+            }
+            public void setEmail(string Email)
+            {
+                this.Email = Email;
+            }
+            public string getEmail()
+            {
+                return Email;
+            }
+        }
+        public class Account
+        {
+            private Password password = new Password();
+            private mail email = new mail();
+            public Account(Password password,mail email)
+            {
+                this.password = password;
+                this.email = email;
+
+            }
+            //Methods:
+            public void emailChecker()
+            {
+                if (email.checkMailExtn())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;//not needed adition
+                    Console.Write("√ ");
+                    Console.ForegroundColor = ConsoleColor.White;//not needed adition
+                    Console.WriteLine("Your account is valid :> And you can sign up with it!");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;//not needed adition
+                    Console.Write("X ");
+                    Console.ForegroundColor = ConsoleColor.White;//not needed adition
+                    Console.WriteLine("Your Email Account doesn't follow the requirements!(not a valid extension)");
+                }
+            }
+            public void passwordChecker()
+            {
+                if (password.hasONELowerCase())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("√ ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Your Account's Password has atleast ONE lower case Character!");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("X ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Your Account's Password doesn't have atleast ONE lower case Character!");
+
+                }
+                if (password.hasONEUpperCase())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("√ ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Your Account's Password has atleast ONE upper case Character!");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("X ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Your Account's Password doesn't have atleast ONE upper case Character!");
+
+                }
+                if (password.validLength())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("√ ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Your Account's Password is 8 character long or higher");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("X ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Your Account's Password isn't 8 character long or higher");
+
+                }
+                if (password.oneNumatLeast())
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("√ ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Your Account's Password has atleast ONE number!");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("X ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Your Account's Password doesn't have atleast ONE number!");
+
+                }
+            }
+        }
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Welcome To The Account Checker!!!");
+            bool playAgain = true;
+
+            while (playAgain)
+            {
+                mail eMail = new mail();
+                Console.WriteLine("Enter your Email: ");
+                eMail.setEmail(Console.ReadLine());
+
+                Password password = new Password();
+                Console.WriteLine("Enter your Password: ");
+                password.setPassword(Console.ReadLine());
+
+                Console.Clear();
+                Console.WriteLine("Loading....");
+                delay(900);
+                Console.Clear();
+                Account account1 = new Account(password, eMail);
+                Console.WriteLine("State: ");
+                account1.emailChecker();
+                account1.passwordChecker();
+                delay(900);
+                Console.WriteLine("Do you want to repeat the program?(y => Yes , anything else => No)");
+                string yN =Console.ReadLine();
+                if (yN == "y")
+                {
+                    playAgain = true;
+                }
+                else
+                {
+                    playAgain = false;
+                }
+                Console.Clear();
+            }
+        }
+        public static void delay(int mSec)
+        {
+            System.Threading.Thread.Sleep(mSec);
+        }
+    }
+}
