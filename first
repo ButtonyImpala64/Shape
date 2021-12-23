@@ -152,7 +152,7 @@ namespace ClassWork1
             public bool checkMailExtn()//checks if it has a valid extension
             {
                 int indexOf = Email.IndexOf('@');//finding the index of the Character : '@' in the given string.
-                if (indexOf == -1 /* || index == -1*/)//if '@' wasn't found it returns the value -1.
+                if (indexOf == -1 /* || index == -1*/||indexOf == 0)//if '@' wasn't found it returns the value -1.
                 {
                     return false;
                 }
@@ -203,7 +203,7 @@ namespace ClassWork1
         {
             private Password password = new Password();
             private mail email = new mail();
-            public Account(Password password,mail email)
+            public Account(Password password, mail email)
             {
                 this.password = password;
                 this.email = email;
@@ -224,7 +224,7 @@ namespace ClassWork1
                     Console.ForegroundColor = ConsoleColor.DarkRed;//not needed adition
                     Console.Write("X ");
                     Console.ForegroundColor = ConsoleColor.White;//not needed adition
-                    Console.WriteLine("Your Email Account doesn't follow the requirements!(not a valid extension)");
+                    Console.WriteLine("Your Email Account doesn't follow the requirements!");
                 }
             }
             public void passwordChecker()
@@ -317,7 +317,7 @@ namespace ClassWork1
                 account1.passwordChecker();
                 delay(900);
                 Console.WriteLine("Do you want to repeat the program?(y => Yes , anything else => No)");
-                string yN =Console.ReadLine();
+                string yN = Console.ReadLine();
                 if (yN == "y")
                 {
                     playAgain = true;
